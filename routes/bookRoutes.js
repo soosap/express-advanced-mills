@@ -1,7 +1,6 @@
 import express from 'express';
-import Book from '../models/bookSchema';
 
-export default () => {
+export default (Book) => {
     var bookRouter = express.Router();
 
     bookRouter.route('/books')
