@@ -12,6 +12,8 @@ services:
         command: ["npm", "start"]
         environment:
             NODE_ENV: development
+            PATH: $PATH:node_modules/.bin
+            TERM: xterm
         links:
             - mills-mongodb:mongodb
 
