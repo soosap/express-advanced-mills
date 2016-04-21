@@ -3,7 +3,7 @@ import express from 'express';
 export default (Book) => {
     var bookRouter = express.Router();
 
-    bookRouter.route('/books')
+    bookRouter.route('/')
         .get((req, res) => {
             let query = {};
             if (req.query.genre) {
@@ -26,7 +26,7 @@ export default (Book) => {
             res.status(201).send(book);
         });
 
-    bookRouter.route('/books/:bookId')
+    bookRouter.route('/:bookId')
         .get((req, res) => {
 
             Book.findById(req.params.bookId, (err, book) => {

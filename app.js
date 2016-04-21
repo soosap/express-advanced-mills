@@ -11,7 +11,7 @@ let port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use('/api', bookRouter(Book));
+app.use('/api/books', bookRouter(Book));
 
 app.get('/', (req, res) => {
     res.send('welcome to my API');
