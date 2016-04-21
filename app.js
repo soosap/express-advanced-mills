@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/api/books', bookRouter(Book));
+// app.use('/api/authors', authorRouter(Author));
 
 app.get('/', (req, res) => {
     res.send('welcome to my API');
