@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+    mills-node:
+        container_name: mills-node
+        image: node:latest
+        ports:
+            - 80:3000
+        volumes:
+            - ./:/srv/www
+        working_dir: /srv/www
+        command: ["npm", "start"]
+        environment:
+            NODE_ENV: development
+        links:
+            - mills-mongodb:mongodb
+
+
+    mills-mongodb:
+        container_name: mills-mongodb
+        image: mongo:3.2.5
+        volumes:
+            - /usr/local/mongodb:/data/db
