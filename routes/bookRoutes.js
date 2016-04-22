@@ -24,7 +24,13 @@ export default (Book) => {
 
     bookRouter.route('/:bookId')
         .get((req, res) => {
-            res.json(req.book);
+            let returnBook = req.book.toJSON();
+            returnBook.links = {};
+
+            let newLink = 'http://' + req.headers.host + '/api/books/?genre=' + returnBook.genre;
+            returnBook.links.FilterByThisGenre = newLink.replace(' ', '%20');
+
+            res.json(returnBook);
         })
 
         .put((req, res) => {
