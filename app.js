@@ -4,7 +4,13 @@ import bodyParser from 'body-parser';
 import Book from './models/bookSchema';
 import bookRouterModule from './routes/bookRoutes';
 
-let db = mongoose.connect('mongodb://mongodb/bookAPI');
+let db;
+if (process.env.ENV === 'test')
+    db = mongoose.connect('mongodb://mongodb/bookAPI_test');
+else {
+    db = mongoose.connect('mongodb://mongodb/bookAPI');
+}
+
 let app = express();
 let port = process.env.PORT || 3000;
 
@@ -18,6 +24,12 @@ app.get('/', (req, res) => {
     res.send('welcome to my API');
 });
 
-app.listen(port, () => {
-    console.log('Running on PORT: ' + port);
-});
+if (!module.parent) {
+// http://www.marcusoft.net/2015/10/eaddrinuse-when-watching-tests-with-mocha-and-supertest.html
+
+    app.listen(port, () => {
+        console.log('Running on PORT: ' + port);
+    });
+}
+
+export default app;
